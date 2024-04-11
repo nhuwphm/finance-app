@@ -1,0 +1,14 @@
+.container{
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1.5fr 1.2fr 0.8fr;
+    grid-template-areas:
+        /* "nav nav nav nav" */
+        "sidebar financial-info financial-info main"
+        "sidebar content1 content2 content3"
+        "sidebar footer footer footer";
+    grid-gap: 0.2rem;
+    
+
+}
