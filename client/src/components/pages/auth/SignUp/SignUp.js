@@ -6,6 +6,9 @@ import CustomButton from '../Button/CustomButton';
 const SignUp = () => {
     return (
         <div className='main'>
+          <div className='logo-container'>
+                <p>SignUp Page - LOGO</p>
+            </div>
         <form className='form'>
           <input
             label="E-mail"
