@@ -1,3 +1,9 @@
+.sidebar {
+    background-color: var(--clr-primary);
+    width: 260px;
+    padding: 36px 20px;
+    transition: var(--transition-default);
+  }
 .profile-pic {
     display: flex;
     flex-direction: column;

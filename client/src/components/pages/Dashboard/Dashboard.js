@@ -21,7 +21,8 @@ function Dashboard() {
 
 
   return (
-    <div className="container">
+    <div className='main-content'>
+    <div className='container'>
         <div className='mainContainer'>
         <div class="small-expenses">
             <div class="small-expenses-title">Subscriptions</div>
@@ -336,6 +337,7 @@ function Dashboard() {
 
 
       </div>
+    </div>
     </div>
     </div>
 

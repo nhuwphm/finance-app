@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
-   <div id="sidebar">
+   <div className='sidebar'>
         <div class="user">
             <div class="profile-pic">
                 <p class="time">Available Balance</p>
