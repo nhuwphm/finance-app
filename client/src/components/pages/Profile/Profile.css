@@ -20,5 +20,5 @@
     display: block; /* makes image a block-level element */
     margin-left: auto; /* next 2 lines center image horizontally within parent element */
     margin-right: auto;
-    width: 50%; /*size of profile picture */
+    width: 25%; /*size of profile picture */
 }
