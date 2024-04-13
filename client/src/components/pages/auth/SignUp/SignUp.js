@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignUp.css';
 import CustomButton from '../Button/CustomButton';
+import CustomInput from '../Input/CustomInput';
 
 const SignUp = () => {
     return (
@@ -10,7 +11,7 @@ const SignUp = () => {
                 <p>SignUp Page - LOGO</p>
             </div>
         <form className='form'>
-          <input
+          <CustomInput
             label="E-mail"
             type="text"
             name="email"
@@ -18,7 +19,7 @@ const SignUp = () => {
             id="email"
             test="input-email-test"
           />
-          <input
+          <CustomInput
             label="Name"
             type="text"
             name="name"
@@ -26,7 +27,7 @@ const SignUp = () => {
             id="name"
             test="input-name-test"
           />
-          <input
+          <CustomInput
             label="Password"
             type="password"
             name="password"
@@ -34,7 +35,7 @@ const SignUp = () => {
             id="password"
             test="input-pass-test"
           />
-          <input
+          <CustomInput
             label="Password confirm"
             type="password"
             name="password-repeat"
