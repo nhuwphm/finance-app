@@ -1,21 +1,20 @@
 import React from 'react';
 import './Profile.css';
-import profilePicture from './bill.jpg'; // import image
-
-import firebase from 'firebase/app';
-import 'firebase/storage';
-import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
+import { getFirestore } from 'firebase/firestore';
 
 //initialize firebase
 const firebaseConfig = {
     //my firebase configuration?
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const storage = firebase.storage();
-const firestore = firebase.firestore();
+const storage = getFirestore(app);
+const firestore = getStorage(app);
 
+let profilePicture = null; // or import an image and assign it to 'profilePicture'
 class Profile extends React.Component {
     constructor(props) {
         super(props);
