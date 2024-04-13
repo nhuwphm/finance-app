@@ -8,6 +8,7 @@ import Login from './components/pages/auth/Login/Login';
 import Layout from './components/layout/Layout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/pages/auth/SignUp/SignUp';
+import Profile from './components/pages/Profile/Profile';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/transaction" element={<Layout><Transaction /></Layout>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
        </AuthProvider>
       </Router>
