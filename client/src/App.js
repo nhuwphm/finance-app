@@ -5,6 +5,7 @@ import Transaction from './components/pages/Transaction/Transaction';
 import Login from './components/pages/auth/Login/Login';
 import Layout from './components/layout/Layout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignUp from './components/pages/auth/SignUp/SignUp';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Layout><Dashboard /></Layout>} />
           <Route path="/transaction" element={<Layout><Transaction /></Layout>} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
     </div>
