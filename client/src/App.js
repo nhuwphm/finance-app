@@ -1,11 +1,13 @@
 import React from 'react';
-import Dashboard from "./components/pages/Dashboard/Dashboard";
-import Sidebar from './components/layout/Sidebar';
-
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import Profile from './components/pages/Profile/Profile';  
-
-
+import './App.css';
+import AuthProvider from './contexts/AuthContext';
+import './firebase'
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import Transaction from './components/pages/Transaction/Transaction';
+import Login from './components/pages/auth/Login/Login';
+import Layout from './components/layout/Layout';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignUp from './components/pages/auth/SignUp/SignUp';
 
 function App() {
 
@@ -14,29 +16,18 @@ function App() {
   } 
 
   return (
-    <div className='container'>
-    <Router>
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Dashboard/>} />
-        <Route path="/Profile" element={<Profile/>} />
-      </Routes>
-    </Router>
-
+    <div className='app'>
+      <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/transaction" element={<Layout><Transaction /></Layout>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+       </AuthProvider>
+      </Router>
     </div>
-    //<Dashboard /> // 1st page displayed when ran
-
-    // <Router>
-    //   <div>
-    //     <Sidebar />
-    //     <Link to="/">Dashboard</Link>
-    //     <Link to="/Profile">Profile</Link>
-    //     <Routes>
-    //       <Route exact path="/" component={<Dashboard/>} />
-    //       <Route path="/Profile" component={<Profile/>} />
-    //     </Routes>
-    //   </div>
-    // </Router>
   );
 }
 
