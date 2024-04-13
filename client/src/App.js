@@ -11,11 +11,6 @@ import SignUp from './components/pages/auth/SignUp/SignUp';
 import Profile from './components/pages/Profile/Profile';
 
 function App() {
-
-  function TestComponent() {
-    return <div>Test Route Component</div>;
-  } 
-
   return (
     <div className='app'>
       <Router>
