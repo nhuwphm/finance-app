@@ -1,20 +1,71 @@
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './SignUp.css';
 import CustomButton from '../Button/CustomButton';
 import CustomInput from '../Input/CustomInput';
 
 const SignUp = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const nameRef = useRef();
+
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const history = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (passwordConfirmRef.current.value !== passwordRef.current.value) {
+      return setError('Passwords do not match');
+    }
+    try {
+      setError(null);
+      setLoading(true);
+      /*await signup(
+        nameRef.current.value,
+        emailRef.current.value,
+        passwordRef.current.value
+      ); */
+      history('/');
+    } catch {
+      setError('Failed to create an account');
+    }
+
+    setLoading(false);
+  }
+
+  const handleEmailChange = (value) => {
+    emailRef.current.value = value;
+  };
+
+  const handlePasswordChange = (value) => {
+    passwordRef.current.value = value;
+  };
+
+  const handlePasswordConfirmChange = (value) => {
+    passwordConfirmRef.current.value = value;
+  };
+
+  const handleNameChange = (value) => {
+    nameRef.current.value = value;
+  };
+
+
     return (
         <div className='main'>
           <div className='logo-container'>
-                <p>SignUp Page - LOGO</p>
-            </div>
-        <form className='form'>
+              <p>SignUp Page - LOGO</p>
+          </div>
+        <form onSubmit={handleSubmit} className='form'>
           <CustomInput
             label="E-mail"
             type="text"
             name="email"
+            inputRef={emailRef}
+            onChange={handleEmailChange}
             required
             id="email"
             test="input-email-test"
@@ -23,6 +74,8 @@ const SignUp = () => {
             label="Name"
             type="text"
             name="name"
+            inputRef={nameRef}
+            onChange={handleNameChange}
             required
             id="name"
             test="input-name-test"
@@ -31,6 +84,8 @@ const SignUp = () => {
             label="Password"
             type="password"
             name="password"
+            inputRef={passwordRef}
+            onChange={handlePasswordChange}
             required
             id="password"
             test="input-pass-test"
@@ -39,6 +94,8 @@ const SignUp = () => {
             label="Password confirm"
             type="password"
             name="password-repeat"
+            inputRef={passwordConfirmRef}
+            onChange={handlePasswordConfirmChange}
             required
             id="password-repeat"
             test="input-pass-confirm-test"
