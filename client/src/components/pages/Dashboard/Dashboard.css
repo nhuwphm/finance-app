@@ -7,16 +7,20 @@ html{
 body{
     background-color: #070319;
 }
+.main-content {
+    flex: 1;
+    padding: 5px;
+  }
 .container{
     display: grid;
     height: 100vh;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1.5fr 1.2fr 0.8fr;
     grid-template-areas:
         /* "nav nav nav nav" */
-        "sidebar financial-info financial-info main"
-        "sidebar content1 content2 content3"
-        "sidebar footer footer footer";
+        " financial-info financial-info main"
+        " content1 content2 content3"
+        " footer footer footer";
     grid-gap: 0.2rem;
     
 

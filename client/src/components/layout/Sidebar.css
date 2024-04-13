@@ -1,3 +1,7 @@
+.sidebar {
+    width: 260px;
+    padding: 36px 20px;
+  }
 .profile-pic {
     display: flex;
     flex-direction: column;
@@ -73,6 +77,11 @@ p.date{
 .option li svg {
     margin-right: 12px; /* Adjust margin as needed */
 }
+.option li{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
 
 .home{
     display: flex;
@@ -107,4 +116,21 @@ p.date{
 .sub-header{
     margin-left: 30px;
     
+}
+.logout {
+    font-family: "Raleway", sans-serif;
+    color: rgb(190, 184, 184);
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    display: block;
+    font-size: 1.4rem;
+}
+.logout li{
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+}
+.logout svg{
+    margin-right: 8px;
 }
