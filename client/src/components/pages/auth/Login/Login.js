@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './Login.css';
 import CustomButton from '../Button/CustomButton';
 import CustomInput from '../Input/CustomInput';
+import { useAuth } from '../../../../contexts/AuthContext';
 
 const Login = () => {
     const emailRef = useRef();
@@ -10,6 +11,8 @@ const Login = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useNavigate();
+    const { currentUser } = useAuth();
+    const { login } = useAuth();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -17,7 +20,7 @@ const Login = () => {
         try {
           setError('');
           setLoading(true);
-          //await login(emailRef.current.value, passwordRef.current.value);
+          await login(emailRef.current.value, passwordRef.current.value);
           history('/');
         } catch {
           setError('Failed to sign in');
@@ -33,6 +36,10 @@ const Login = () => {
       const handlePasswordChange = (value) => {
         passwordRef.current.value = value;
       };
+
+      if (currentUser) {
+        return <Navigate to="/" replace />;
+      }
       
     return(
         <div className='loginMain'>
@@ -40,6 +47,7 @@ const Login = () => {
                 <p>Login Page - LOGO</p>
             </div>
             <form onSubmit={handleSubmit} className='form'>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
                 <CustomInput label="E-mail"
                     type="text"
                     inputRef={emailRef}

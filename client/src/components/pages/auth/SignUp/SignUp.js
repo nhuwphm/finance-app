@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './SignUp.css';
 import CustomButton from '../Button/CustomButton';
 import CustomInput from '../Input/CustomInput';
+import { useAuth } from '../../../../contexts/AuthContext';
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -12,6 +13,8 @@ const SignUp = () => {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
+  const { currentUser } = useAuth();
 
   const history = useNavigate();
 
@@ -24,11 +27,11 @@ const SignUp = () => {
     try {
       setError(null);
       setLoading(true);
-      /*await signup(
+      await signup(
         nameRef.current.value,
         emailRef.current.value,
         passwordRef.current.value
-      ); */
+      );
       history('/');
     } catch {
       setError('Failed to create an account');
@@ -53,6 +56,9 @@ const SignUp = () => {
     nameRef.current.value = value;
   };
 
+  if (currentUser) {
+    return <Navigate to="/" replace />;
+  }
 
     return (
         <div className='main'>
@@ -100,7 +106,7 @@ const SignUp = () => {
             id="password-repeat"
             test="input-pass-confirm-test"
           />
-          <CustomButton type="submit" title="Sign Up" />
+          <CustomButton disabled={loading} type="submit" title="Sign Up" />
         </form>
         <div className='link'>
           Already have an account?
