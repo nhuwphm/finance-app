@@ -8,7 +8,8 @@ function FinancialHelp() {
   const [messages, setMessages] = useState([
     {
       message: "Hello, I'm a virtual assistant of Smart Spender! I'm here to help you with your finances. Ask me anything!!",
-      sender: "ChatGPT"
+      sender: "ChatGPT",
+      direction:'incoming'
     }
   ]);
 
