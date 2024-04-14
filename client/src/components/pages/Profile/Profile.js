@@ -1,48 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Profile.css';
-import firebase from 'firebase/app';
-import { getAuth, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { getAuth, updateProfile } from "firebase/auth";
 
-class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: 'John Doe',
-            email: 'johndoe@example.com',
-            profilePicture: null,
-        };
-        this.handleImageChange = this.handleImageChange.bind(this);
-    }
+const auth = getAuth();
+const storage = getStorage();
 
-    handleImageChange(e) {
-        const file = e.target.files[0];
-        const storage = getStorage();
-        const storageRef = ref(storage, 'some-child');
-        uploadBytesResumable(storageRef, file).then(() => {
-            getDownloadURL(storageRef).then((url) => {
-                this.setState({ profilePicture: url });
-                const auth = getAuth();
-                const user = auth.currentUser;
-                user.updateProfile({
-                    photoURL: url
-                }).catch((error) => {
-                    console.error("Error updating user profile", error);
-                });
-            });
-        });
-    }
-
-    render() {
-        return (
-            <div className="profile">
-                <h1>Profile Page</h1>
-                <p>Name: {this.state.name}</p>
-                <p>Email: {this.state.email}</p>
-                <img src={this.state.profilePicture} alt="Profile" />
-                <input type="file" onChange={this.handleImageChange} />
-            </div>
+async function uploadImageAndGetURL(file) {
+    // Create a storage reference
+    const storageRef = ref(storage, 'profilePictures/' + file.name);
+    // Upload file and store the task
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    // Wait for the upload to complete
+    await new Promise((resolve, reject) => {
+        uploadTask.on('state_changed', 
+        (snapshot) => {}, 
+        (error) => reject(error), 
+        () => resolve()
         );
-    }
+    });
+    // Get the download URL
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
 }
+  
+async function updateProfilePicture(file) {
+    const url = await uploadImageAndGetURL(file);
+    // Update the user's profile
+    await updateProfile(auth.currentUser, {
+        photoURL: url
+    });
+}
+
+// Define the Profile component
+function Profile() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [profilePic, setProfilePic] = useState('');
+  
+    useEffect(() => {
+        const auth = getAuth();
+        if (auth.currentUser) {
+          setName(auth.currentUser.displayName);
+          setEmail(auth.currentUser.email);
+          setProfilePic(auth.currentUser.photoURL);
+        }
+      }, []);
+
+      const handleFileUpload = async (event) => {
+                // Get the file from the event
+        const file = event.target.files[0];
+
+        // Upload the file and get the URL
+        const url = await uploadImageAndGetURL(file);
+
+        // Update the user's profile picture URL
+        await updateProfile(auth.currentUser, {
+            photoURL: url,
+        });
+    
+        setProfilePic(auth.currentUser.photoURL);
+      };
+
+  // Replace this with your actual component code
+    return (
+        <div>
+            <h1>{name}</h1>
+            <p>{email}</p>
+            <img src={profilePic} alt="Profile" />
+            <input type="file" onChange={handleFileUpload} />
+        </div>
+    );
+}
+
 export default Profile;
