@@ -11,7 +11,6 @@ import SignUp from './components/pages/auth/SignUp/SignUp';
 import Profile from './components/pages/Profile/Profile';
 
 function App() {
-
   return (
     <div className='app'>
       <Router>
