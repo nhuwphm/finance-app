@@ -9,6 +9,7 @@ import Layout from './components/layout/Layout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/pages/auth/SignUp/SignUp';
 import Profile from './components/pages/Profile/Profile';
+import FinancialHelp from './components/pages/Financial Help/FinancialHelp';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout><Dashboard /></Layout>} />
           <Route path="/transaction" element={<Layout><Transaction /></Layout>} />
+          <Route path="/financial-help" element={<Layout><FinancialHelp /></Layout>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />

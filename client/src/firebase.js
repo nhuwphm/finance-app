@@ -5,6 +5,7 @@ import {getAuth} from 'firebase/auth';
 const firebaseConfig = {
   apiKey: "AIzaSyBWkbc7sM5xzrmr9PnueiDymBZdhmpNxdQ",
   authDomain: "finance-app-59f62.firebaseapp.com",
+  databaseURL: "https://finance-app-59f62-default-rtdb.firebaseio.com",
   projectId: "finance-app-59f62",
   storageBucket: "finance-app-59f62.appspot.com",
   messagingSenderId: "806564549621",
