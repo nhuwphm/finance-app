@@ -5,6 +5,7 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 import { PersistentCacheIndexManager } from 'firebase/firestore';
 
 function FinancialHelp() {
+  const [typing, setTyping] = useState (false);
   const [messages, setMessages] = useState([
     {
       message: "Hello, I'm a virtual assistant of Smart Spender! I'm here to help you with your finances. Ask me anything!!",
@@ -22,6 +23,8 @@ function FinancialHelp() {
 
     const newMessages = [...messages, newMessage];
     setMessages(newMessages);
+
+    setTyping(true);
   }
     
 
@@ -32,7 +35,8 @@ function FinancialHelp() {
     <div className="messages-container">
       <MainContainer>
         <ChatContainer>
-          <MessageList>
+          <MessageList typingIndicator= {typing ?<TypingIndicator content="SmartSpender is typing"/> : null}>
+
             {messages.map((message,i) => {
               return <Message key={i} model={message} />
             })}
