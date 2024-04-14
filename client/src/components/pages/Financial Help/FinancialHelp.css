@@ -26,23 +26,6 @@ h1 {
     padding: 0px;
     background-color: #5e5a5a49;
     position: relative;
+    height: inherit;
 }
 
-/*message styling */
-.message {
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #e0e0e0; 
-}
-
-.message.user {
-    background-color: #007bff; 
-    color: white;
-    text-align: right;
-}
-
-.message.virtual-assistant {
-    background-color: #ffffff; 
-    text-align: left;
-}

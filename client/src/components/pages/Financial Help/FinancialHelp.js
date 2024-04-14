@@ -68,7 +68,8 @@ const systemMessage = {
       console.log(data);
       setMessages([...chatMessages, {
         message: data.choices[0].message.content,
-        sender: "ChatGPT"
+        sender: "ChatGPT",
+        direction: "incoming"
       }]);
       setIsTyping(false);
     });
@@ -84,6 +85,7 @@ const systemMessage = {
           typingIndicator= {isTyping ?<TypingIndicator content="SmartSpender is typing"/> : null}>
 
             {messages.map((message,i) => {
+              console.log(message)
               return <Message key={i} model={message} />
             })}
           </MessageList>
