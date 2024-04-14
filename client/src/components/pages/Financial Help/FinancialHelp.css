@@ -13,7 +13,7 @@
 }
 
 h1 {
-    background-color: #007bff;
+    background-color: #419d71;
     color: white;
     padding: 10px 20px;
     margin: 0;
@@ -29,3 +29,13 @@ h1 {
     height: inherit;
 }
 
+.cs-message-list{
+    background-color: #050505fe !important;
+}
+
+.cs-message--incoming .cs-message__content {
+    color: rgb(252, 250, 250) !important;
+    background-color: #1d917c !important;
+    border-radius: .8em .7em .7em .8em !important;
+    font-size: 1.1rem !important;
+}
