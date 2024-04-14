@@ -4,6 +4,10 @@
     margin: 0 auto;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Add this */
+    flex-direction: column; /* Add this */
+    align-items: center; /* Add this */
+    justify-content: center; /* Add this */
 }
 
 .profile h1 {
@@ -14,11 +18,13 @@
 .profile p {
     font-size: 18px;
     line-height: 1.6;
+    text-align: center; /* Add this if you want to center the text within the <p> elements */
 }
 
-.profile img {
-    display: block; /* makes image a block-level element */
-    margin-left: auto; /* next 2 lines center image horizontally within parent element */
+.profile img{
+    display: block;
+    margin-left: auto;
     margin-right: auto;
-    width: 25%; /*size of profile picture */
+    width: 25%;
+    border-radius: 50%; /* makes pfp circle */
 }

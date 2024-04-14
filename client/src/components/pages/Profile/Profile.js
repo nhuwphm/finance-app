@@ -23,14 +23,6 @@ async function uploadImageAndGetURL(file) {
     const downloadURL = await getDownloadURL(storageRef);
     return downloadURL;
 }
-  
-async function updateProfilePicture(file) {
-    const url = await uploadImageAndGetURL(file);
-    // Update the user's profile
-    await updateProfile(auth.currentUser, {
-        photoURL: url
-    });
-}
 
 // Define the Profile component
 function Profile() {
@@ -62,9 +54,8 @@ function Profile() {
         setProfilePic(auth.currentUser.photoURL);
       };
 
-  // Replace this with your actual component code
     return (
-        <div>
+        <div className = "profile">
             <h1>{name}</h1>
             <p>{email}</p>
             <img src={profilePic} alt="Profile" />
