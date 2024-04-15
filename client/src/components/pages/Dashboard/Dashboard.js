@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
-
 import groceriesImage from './png/grocery-store-groceries-svgrepo-com.svg';
 import RelaxImage from'./png/relax.svg';
 import NexflixImage from './png/netflix-svgrepo-com.svg';
@@ -10,6 +9,7 @@ import HomeImage from './png/home.svg';
 import FoodImage from './png/food-svgrepo-com.svg';
 import ToolsImage from './png/tools.svg';
 import WebFont from 'webfontloader';
+import Reminder from './Reminder';
 
 WebFont.load({
   google: {
@@ -19,7 +19,6 @@ WebFont.load({
 
 
 function Dashboard() {
-
     const [reminders, setReminders] = useState([
         { id: 1, text: "Wells Fargo September, September 27th", completed: false },
         { id: 2, text: "Texas Mobility Authority, August 7th", completed: false },
@@ -27,6 +26,12 @@ function Dashboard() {
         { id: 4, text: "Card, April 8th", completed: false },
         { id: 5, text: "Discover card due on April 8th", completed: false }
       ]);
+
+      //reminders
+      const addReminder = (text) => {
+        const newReminder = { id: reminders.length + 1, text, completed: false };
+        setReminders([...reminders, newReminder]);
+      };
     
       const markAsComplete = id => {
         setReminders(reminders.map(reminder => 
@@ -107,10 +112,11 @@ function Dashboard() {
         )) : (
           <div className="no-reminders">
             <p>Currently No Reminders</p>
-            <img src={RelaxImage} alt="Relax Image" width="50" height="50" />
+            <img src={RelaxImage} alt="Relax" width="50" height="50" />
           </div>
         )}
       </div>
+      <Reminder addReminder={addReminder}/>
     </div>
         
         <div id="content2">
