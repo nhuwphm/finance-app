@@ -3,6 +3,9 @@ import './Dashboard.css';
 
 import groceriesImage from './png/grocery-store-groceries-svgrepo-com.svg';
 import RelaxImage from'./png/relax.svg';
+import NexflixImage from './png/netflix-svgrepo-com.svg';
+import AmazonImage from './png/amazon-prime.svg';
+import DisneyImage from './png/disneyplus-svgrepo-com.svg';
 import WebFont from 'webfontloader';
 
 WebFont.load({
@@ -45,19 +48,19 @@ function Dashboard() {
         <div class="small-expenses">
             <div class="small-expenses-title">Subscriptions</div>
             <div class="netflix">
-                <div class="netflix-logo"><img src="./png/netflix-svgrepo-com.svg" alt="" /></div>
+                <div class="netflix-logo"><img src= {NexflixImage} alt="" /></div>
                 <div class="expense">$12.49/mo</div>
                 <button class="expense-button">manage</button>
                
                 
             </div>
             <div class="disney-plus">
-                <div class="disney-logo"><img src="./png/disneyplus-svgrepo-com.svg" alt=""/></div>
+                <div class="disney-logo"><img src={DisneyImage} alt=""/></div>
                 <div class="expense">$8.74/yr</div>
                 <button class="expense-button">manage</button>
             </div>
             <div class="amazon">
-                <div class="amazon-logo"><img src="./png/amazon-prime.svg" alt=""/></div>
+                <div class="amazon-logo"><img src={AmazonImage} alt=""/></div>
                 <div class="expense">$12.49/yr</div>
                 <button class="expense-button">manage</button>
             </div>
