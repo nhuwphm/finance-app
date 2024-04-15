@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
-import Sidebar from '../../layout/Sidebar';
+
 import groceriesImage from './png/grocery-store-groceries-svgrepo-com.svg';
+import RelaxImage from'./png/relax.svg';
 import WebFont from 'webfontloader';
 
 WebFont.load({
@@ -10,15 +11,32 @@ WebFont.load({
   }
 });
 
+
 function Dashboard() {
 
+    const [reminders, setReminders] = useState([
+        { id: 1, text: "Wells Fargo September, September 27th", completed: false },
+        { id: 2, text: "Texas Mobility Authority, August 7th", completed: false },
+        { id: 3, text: "School Student Loan, December 6th", completed: false },
+        { id: 4, text: "Card, April 8th", completed: false },
+        { id: 5, text: "Discover card due on April 8th", completed: false }
+      ]);
+    
+      const markAsComplete = id => {
+        setReminders(reminders.map(reminder => 
+          reminder.id === id ? { ...reminder, completed: !reminder.completed } : reminder
+        ));
+      };
+    
+      const removeReminder = id => {
+        setReminders(reminders.filter(reminder => reminder.id !== id));
+      };
 
   const [expensesVisible, setExpensesVisible] = useState(false);
   const toggleExpenses = () => {
     setExpensesVisible(prevState => !prevState);
   };
   
-
 
   return (
     <div className='main-content'>
@@ -67,100 +85,28 @@ function Dashboard() {
 
     </div>
 
-        <div id="content1">
-        <p class="reminder-title">Reminders</p>
-        <div class="reminders">
-            <div class="reminder">
-                <div class="reminder-content">
-                    Wells Fargo September, September 27th
-                    
+    <div id="content1">
+      <p className="reminder-title">Reminders</p>
+      <div className="reminders">
+        {reminders.length ? reminders.map(reminder => (
+          <div key={reminder.id} className={`reminder ${reminder.completed ? 'complete-line' : ''}`}>
+            <div className="reminder-content">{reminder.text}</div>
+            <div className="buttons">
+                <div class="complete">
+                <button onClick={() => markAsComplete(reminder.id)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="complete-svg"><path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h10a1.5 1.5 0 001.5-1.5V8a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5h8a.5.5 0 000-1H3A1.5 1.5 0 001.5 3v10z" clip-rule="evenodd"></path></svg></button>
                 </div>
-                <div class="buttons">
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="complete-svg"><path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h10a1.5 1.5 0 001.5-1.5V8a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5h8a.5.5 0 000-1H3A1.5 1.5 0 001.5 3v10z" clip-rule="evenodd"></path></svg></button>
-                    </div>
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="remove-svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg></button>
-                    </div>
-                </div>
+                <div class="remove">
+              <button onClick={() => removeReminder(reminder.id)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="remove-svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg></button>
+              </div>
             </div>
-            <div class="reminder">
-                <div class="reminder-content">
-                    Texas Mobility Authority, August 7th
-                    
-                </div>
-                <div class="buttons">
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="complete-svg"><path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h10a1.5 1.5 0 001.5-1.5V8a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5h8a.5.5 0 000-1H3A1.5 1.5 0 001.5 3v10z" clip-rule="evenodd"></path></svg></button>
-                    </div>
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="remove-svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg></button>
-                    </div>
-                </div>
-
-            </div>
-            <div class="reminder">
-                <div class="reminder-content">
-                    School Student Loan, December 6th
-                    
-                </div>
-                <div class="buttons">
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="complete-svg"><path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h10a1.5 1.5 0 001.5-1.5V8a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5h8a.5.5 0 000-1H3A1.5 1.5 0 001.5 3v10z" clip-rule="evenodd"></path></svg></button>
-                    </div>
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="remove-svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg></button>
-                    </div>
-                </div>
-
-            </div>
-            <div class="reminder">
-                <div class="reminder-content">
-                    card, April 8th
-                    
-                </div>
-                <div class="buttons">
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="complete-svg"><path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h10a1.5 1.5 0 001.5-1.5V8a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5h8a.5.5 0 000-1H3A1.5 1.5 0 001.5 3v10z" clip-rule="evenodd"></path></svg></button>
-                    </div>
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="remove-svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg></button>
-                    </div>
-                </div>
-
-            </div>
-            <div class="reminder">
-                <div class="reminder-content">
-                    Discover card due on April 8th
-                    
-                </div>
-                <div class="buttons">
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="complete-svg"><path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h10a1.5 1.5 0 001.5-1.5V8a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5h8a.5.5 0 000-1H3A1.5 1.5 0 001.5 3v10z" clip-rule="evenodd"></path></svg></button>
-                    </div>
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="remove-svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg></button>
-                    </div>
-                </div>
-
-            </div>
-            <div class="reminder">
-                <div class="reminder-content">
-                    card, April 8th
-                    
-                </div>
-                <div class="buttons">
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="complete-svg"><path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 13A1.5 1.5 0 003 14.5h10a1.5 1.5 0 001.5-1.5V8a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5h8a.5.5 0 000-1H3A1.5 1.5 0 001.5 3v10z" clip-rule="evenodd"></path></svg></button>
-                    </div>
-                    <div class="remove">
-                        <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="remove-svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg></button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        
+          </div>
+        )) : (
+          <div className="no-reminders">
+            <p>Currently No Reminders</p>
+            <img src={RelaxImage} alt="Relax Image" width="50" height="50" />
+          </div>
+        )}
+      </div>
     </div>
         
         <div id="content2">
@@ -207,20 +153,19 @@ function Dashboard() {
     </div>
 
     <div id="content3">
-    <p class="progress-title">Progress</p>
-        <div class="monthly-income-info">
-            <div class="monthly-income">Current Monthly Income</div>
-            <div class="monthly-income-amount">$4,457.67</div>
+    <p className="progress-title">Progress</p>
+        <div className="monthly-income-info">
+            <div className="monthly-income">Current Monthly Income</div>
+            <div className="monthly-income-amount">$4,457.67</div>
         </div>
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar">78%</div>
-            
+        <div className="progress-container">
+            <div className="progress-bar" id="myBar">78%</div>
         </div>
-        <div class="total-spent">
-            <div class="amount-spent-text">Total Amount Spent</div>
-            <div class="amount-spent">$3,657.83</div>
+        <div className="total-spent">
+            <div className="amount-spent-text">Total Amount Spent</div>
+            <div className="amount-spent">$3,657.83</div>
         </div>
-        
+
     </div>
     <div className='footerContainer'>
       <div className="summary-expenses">
