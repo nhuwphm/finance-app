@@ -39,8 +39,16 @@ function Profile() {
     
     const handleEmailSubmit = async (event) => {
         event.preventDefault();
-        await updateEmail(auth.currentUser, newEmail);
-        await sendEmailVerification(auth.currentUser);
+        const actionCodeSettings = {
+            url: window.location.href, // This URL should lead the user back to your app
+            handleCodeInApp: true,
+        };
+        await sendEmailVerification(auth.currentUser, actionCodeSettings);
+    };
+    const handleEmailVerification = async (actionCode) => {
+        const info = await checkActionCode(auth, actionCode);
+        await applyActionCode(auth, actionCode);
+        await updateEmail(auth.currentUser, info.data.email);
     };
     
 
@@ -64,6 +72,13 @@ function Profile() {
           setName(auth.currentUser.displayName);
           setEmail(auth.currentUser.email);
           setProfilePic(auth.currentUser.photoURL);
+
+        //email
+        const urlParams = new URLSearchParams(window.location.search);
+        const actionCode = urlParams.get('oobCode');
+        if (actionCode) {
+            handleEmailVerification(actionCode);
+        }
         }
       }, []);
       
