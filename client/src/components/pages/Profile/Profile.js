@@ -108,23 +108,23 @@ function Profile() {
             <h1>Hello, {auth.currentUser.displayName}</h1>
             <img src={profilePic} alt="Profile" />
             <input type="file" id="fileUpload" onChange={handleFileUpload} style={{display: 'none'}} />
-            <label htmlFor="fileUpload" className="customFileUpload">Upload Image</label>
+            <label htmlFor="fileUpload" className="customFileUpload btn">Upload Image</label>
             <p>Email: {email}</p>
 
-            <form onSubmit={handleUsernameSubmit}>  
+            <form onSubmit={handleUsernameSubmit} className="input-group">  
                 <label>
                     Edit Name:
-                    <input type="text" value={name} onChange={handleUsernameChange} />
+                    <input type="text" value={name} onChange={handleUsernameChange} className="input" />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" className="button--submit" />
             </form>
             
-            <form onSubmit={handleEmailSubmit}>
+            <form onSubmit={handleEmailSubmit} className="input-group">
                 <label>
                     Edit Email:
-                    <input type="text" value={newEmail} onChange={handleEmailChange} />
+                    <input type="text" value={newEmail} onChange={handleEmailChange} className="input" />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" className="button--submit" />
             </form>
         </div>
     );
