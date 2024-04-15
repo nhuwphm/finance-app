@@ -71,7 +71,12 @@ function Profile() {
         if (auth.currentUser) {
           setName(auth.currentUser.displayName);
           setEmail(auth.currentUser.email);
-          setProfilePic(auth.currentUser.photoURL);
+        if (auth.currentUser.photoURL) {
+            setProfilePic(auth.currentUser.photoURL);
+        } else {
+            // Set default profile picture if none exists
+            setProfilePic('https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg');
+        }
 
         //email
         const urlParams = new URLSearchParams(window.location.search);
