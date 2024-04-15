@@ -259,16 +259,17 @@ button {
     padding-right: 6px;
 }
 
+
 .buttons button {
     margin-left: 10px;
     background-color: transparent;
     border-radius: 5px;
     border: 1px solid rgb(59, 6, 158);
-    transition: background-color 0.5s;
+    transition: background-color 0.5;
 }
 
 .buttons button:hover {
-    background-color: rgba(241, 237, 248, 0.1);
+    background-color: rgba(35, 16, 69, 0.1);
 }
 
 .remove-svg {
@@ -471,13 +472,14 @@ button {
     font-size: 30px;
     border: 1px solid rgb(37, 34, 40);
     border-radius: 15px;
-    
+
 }
 .summary-text{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 5px;
 
 }
 .total-monthly-expense-title{
@@ -495,12 +497,14 @@ button {
     height: 100%;
 }
 
-.expense-toggle-button{  
+.expense-toggle-button{
+    
     width: 50%;
     height: 25%;
     border: 1px solid rgb(80, 7, 152);
     border-radius: 50px;
     padding: 5px;
+    /* font-family: "Raleway", sans-serif;; */
     font-weight: 300;
     color: rgb(230, 225, 231);
 }
@@ -508,22 +512,24 @@ button {
 .living-expense {
     opacity: 0;
     transition: opacity 1.5s ease;
-    cursor: pointer;
+    cursor: pointer; 
     pointer-events: none; 
+    transform: translateY(20px);
 }
 
 .living-expense:hover {
-    background-color: #6608c4;
+    background-color: #6608c4; 
 }
 
 .living-expense.visible {
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: auto; 
+    transform: translateY(0px);
+}
+.hidden {
+    display: none; 
 }
 
-.hidden {
-    display: none;
-  }
 
 /*********************** Progress Bar *********************************/
 .progress-title{

@@ -6,6 +6,9 @@ import RelaxImage from'./png/relax.svg';
 import NexflixImage from './png/netflix-svgrepo-com.svg';
 import AmazonImage from './png/amazon-prime.svg';
 import DisneyImage from './png/disneyplus-svgrepo-com.svg';
+import HomeImage from './png/home.svg';
+import FoodImage from './png/food-svgrepo-com.svg';
+import ToolsImage from './png/tools.svg';
 import WebFont from 'webfontloader';
 
 WebFont.load({
@@ -51,8 +54,6 @@ function Dashboard() {
                 <div class="netflix-logo"><img src= {NexflixImage} alt="" /></div>
                 <div class="expense">$12.49/mo</div>
                 <button class="expense-button">manage</button>
-               
-                
             </div>
             <div class="disney-plus">
                 <div class="disney-logo"><img src={DisneyImage} alt=""/></div>
@@ -171,42 +172,37 @@ function Dashboard() {
 
     </div>
     <div className='footerContainer'>
-      <div className="summary-expenses">
-        <div className="summary">
-          <div className="summary-text">
-            <div className="total-monthly-expense-title">Total Monthly Expense</div>
-            <div className="total-monthly-expense-text">$3,567.56</div>
+    <div className="summary-expenses">
+            <div className="summary">
+                <div className="summary-text">
+                    <div className="total-monthly-expense-title">Total Monthly Expense</div>
+                    <div className="total-monthly-expense-text">$3,567.56</div>
+                    <button className="expense-toggle-button" onClick={toggleExpenses}>Expenses</button>
+                </div>
+            </div>
             
-            <button className="expense-toggle-button" onClick={toggleExpenses}>Expenses</button>
-          </div>
+            <div className={`living-expense ${expensesVisible ? 'visible' : 'hidden'}`}>
+                <img src={HomeImage} alt="Home"/>
+                <div className="living-title">Living</div>
+                <div className="living-cost">$2,075.54</div>
+            </div>
+            
+            <div className={`living-expense ${expensesVisible ? 'visible' : 'hidden'}`}>
+                <img src={FoodImage} alt="Take Out"/>
+                <div className="living-title">Take Out</div>
+                <div className="living-cost">$504.76</div>
+            </div>
+            <div className={`living-expense ${expensesVisible ? 'visible' : 'hidden'}`}>
+                <img src={groceriesImage} alt="Groceries"/>
+                <div className="living-title">Groceries</div>
+                <div className="living-cost">$1,272.31</div>
+            </div>
+            <div className={`living-expense ${expensesVisible ? 'visible' : 'hidden'}`}>
+                <img src={ToolsImage} alt="Utilities"/>
+                <div className="living-title">Utilities</div>
+                <div className="living-cost">$239.63</div>
+            </div>
         </div>
-        
-        <div className="living-expense">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3,13h1v2v5c0,1.103,0.897,2,2,2h3h6h3c1.103,0,2-0.897,2-2v-5v-2h1c0.404,0,0.77-0.244,0.924-0.617 c0.155-0.374,0.069-0.804-0.217-1.09l-9-9c-0.391-0.391-1.023-0.391-1.414,0l-9,9c-0.286,0.286-0.372,0.716-0.217,1.09 C2.23,12.756,2.596,13,3,13z M10,20v-5h4v5H10z M12,4.414l6,6V15l0,0l0.001,5H16v-5c0-1.103-0.897-2-2-2h-4c-1.103,0-2,0.897-2,2v5 H6v-5v-3v-1.586L12,4.414z"></path></svg>
-            <div className="living-title">Living</div>
-            <div className="living-cost">$2,075.54</div>
-        </div>
-
-        <div className="living-expense">
-            <img src="png/food-svgrepo-com.svg" alt=""/>
-            <div className="living-title">Take Out</div>
-            <div className="living-cost">$504.76</div>
-        </div>
-        <div className="living-expense">
-            <img src={groceriesImage} alt="Groceries"/>
-            <div className="living-title">Groceries</div>
-            <div className="living-cost">$987.65</div>
-        </div>
-        <div className="living-expense">
-            <img src="png/food-svgrepo-com.svg" alt=""/>
-            <div className="living-title">Take Out</div>
-            <div className="living-cost">$504.76</div>
-        </div>
-
-
-
-
-      </div>
     </div>
     </div>
     </div>
