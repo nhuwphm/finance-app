@@ -20,11 +20,6 @@ WebFont.load({
 
 function Dashboard() {
     const [reminders, setReminders] = useState([
-        { id: 1, text: "Wells Fargo September, September 27th", completed: false },
-        { id: 2, text: "Texas Mobility Authority, August 7th", completed: false },
-        { id: 3, text: "School Student Loan, December 6th", completed: false },
-        { id: 4, text: "Card, April 8th", completed: false },
-        { id: 5, text: "Discover card due on April 8th", completed: false }
       ]);
 
       //reminders

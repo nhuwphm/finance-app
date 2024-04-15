@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
+import './Reminder.css';
 import { getAuth } from "firebase/auth";
-import { collection, addDoc, onSnapshot, query, doc, deleteDoc } from "firebase/firestore"; 
+import { collection, onSnapshot, query, doc, deleteDoc, addDoc, updateDoc} from "firebase/firestore"; 
 import { db } from "../../../firebase"
 
 function Reminder({ addReminder }) {
@@ -22,6 +23,16 @@ function Reminder({ addReminder }) {
             return () => unsubscribe();
         }
     }, []);
+
+    const handleMarkReminderComplete = async (reminder) => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+            const reminderRef = doc(db, 'users', user.uid, 'reminders', reminder.id);
+            await updateDoc(reminderRef, { complete: !reminder.complete });
+        }
+    };
 
     const handleRemoveReminder = async (reminder) => {
         const auth = getAuth();
@@ -58,12 +69,13 @@ function Reminder({ addReminder }) {
             <div className="reminder-content">
                 <form onSubmit={handleReminderSubmit}>
                     <input type="text" value={newReminder} onChange={handleReminderChange} placeholder="Add reminder" className="reminder-input" />
-                    <button type="submit" className="reminder-button">Add Reminder</button>
+                    <button type="submit" className="reminder-button addmoney">Add Reminder</button>
                 </form>
 
                 {reminders && reminders.map((reminder, index) => (
                     <div key={index}>
                         <p>{reminder.text}</p>
+                        <input type="checkbox" checked={reminder.complete} onChange={() => handleMarkReminderComplete(reminder)} />
                         <button onClick={() => handleRemoveReminder(reminder)}>Remove</button>
                     </div>
                 ))}
