@@ -4,6 +4,7 @@ import './SignUp.css';
 import CustomButton from '../Button/CustomButton';
 import CustomInput from '../Input/CustomInput';
 import { useAuth } from '../../../../contexts/AuthContext';
+import LogoImage from '../../auth/logo/FALogo.png';
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -63,7 +64,7 @@ const SignUp = () => {
     return (
         <div className='main'>
           <div className='logo-container'>
-              <p>SignUp Page - LOGO</p>
+          <div ><img src= {LogoImage} alt="" /></div>
           </div>
         <form onSubmit={handleSubmit} className='form'>
           <CustomInput

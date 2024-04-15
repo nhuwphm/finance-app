@@ -42,3 +42,15 @@
     opacity: 0.5;
   }
   
+  .logo-container{
+    width: 100px;  
+    height: 100px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;    
+    margin-bottom: 20px; 
+}
+.logo-container img {
+  max-width: 100%;
+  max-height: 100%; 
+}
