@@ -30,6 +30,21 @@ function Profile() {
     const [email, setEmail] = useState('');
     const [profilePic, setProfilePic] = useState('');
   
+    const updateUsername = async () => {
+        await updateProfile(auth.currentUser, {
+            displayName: name,
+        });
+    };
+
+    const handleUsernameChange = (event) => {
+        setName(event.target.value);
+    };
+
+    const handleUsernameSubmit = (event) => {
+        event.preventDefault();
+        updateUsername();
+    };
+
     useEffect(() => {
         const auth = getAuth();
         if (auth.currentUser) {
@@ -56,11 +71,18 @@ function Profile() {
 
     return (
         <div className = "profile">
-            <h1>Hello, {name}</h1>
+            <h1>Hello, {auth.currentUser.displayName}</h1>
             <img src={profilePic} alt="Profile" />
             <input type="file" id="fileUpload" onChange={handleFileUpload} style={{display: 'none'}} />
             <label htmlFor="fileUpload" className="customFileUpload">Upload Image</label>
             <p>Email: {email}</p>
+            <form onSubmit={handleUsernameSubmit}>
+                <label>
+                    Edit Name:
+                    <input type="text" value={name} onChange={handleUsernameChange} />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
         </div>
     );
 }
