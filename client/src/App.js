@@ -24,7 +24,7 @@ function App() {
           <Route path="/report" element={<Layout><Report /></Layout>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Layout><Profile /></Layout>} />
         </Routes>
        </AuthProvider>
       </Router>

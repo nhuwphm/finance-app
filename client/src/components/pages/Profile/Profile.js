@@ -57,10 +57,10 @@ function Profile() {
     return (
         <div className = "profile">
             <h1>Hello, {name}</h1>
-            <p>Email: {email}</p>
             <img src={profilePic} alt="Profile" />
             <input type="file" id="fileUpload" onChange={handleFileUpload} style={{display: 'none'}} />
             <label htmlFor="fileUpload" className="customFileUpload">Upload Image</label>
+            <p>Email: {email}</p>
         </div>
     );
 }
