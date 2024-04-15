@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.css';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth, updateProfile, updateEmail, sendEmailVerification, applyActionCode, checkActionCode } from "firebase/auth";
 
 const auth = getAuth();
 const storage = getStorage();
@@ -24,22 +24,35 @@ async function uploadImageAndGetURL(file) {
     return downloadURL;
 }
 
-// Define the Profile component
+// Profile Component
 function Profile() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [profilePic, setProfilePic] = useState('');
+    const [newEmail, setNewEmail] = useState('');
   
+
+    //Email
+    const handleEmailChange = (event) => {
+        setNewEmail(event.target.value);
+    };
+    
+    const handleEmailSubmit = async (event) => {
+        event.preventDefault();
+        await updateEmail(auth.currentUser, newEmail);
+        await sendEmailVerification(auth.currentUser);
+    };
+    
+
+    //Username 
     const updateUsername = async () => {
         await updateProfile(auth.currentUser, {
             displayName: name,
         });
     };
-
     const handleUsernameChange = (event) => {
         setName(event.target.value);
     };
-
     const handleUsernameSubmit = (event) => {
         event.preventDefault();
         updateUsername();
@@ -53,7 +66,8 @@ function Profile() {
           setProfilePic(auth.currentUser.photoURL);
         }
       }, []);
-
+      
+      //Profile picture
       const handleFileUpload = async (event) => {
                 // Get the file from the event
         const file = event.target.files[0];
@@ -68,7 +82,7 @@ function Profile() {
     
         setProfilePic(auth.currentUser.photoURL);
       };
-
+    
     return (
         <div className = "profile">
             <h1>Hello, {auth.currentUser.displayName}</h1>
@@ -76,10 +90,19 @@ function Profile() {
             <input type="file" id="fileUpload" onChange={handleFileUpload} style={{display: 'none'}} />
             <label htmlFor="fileUpload" className="customFileUpload">Upload Image</label>
             <p>Email: {email}</p>
-            <form onSubmit={handleUsernameSubmit}>
+
+            <form onSubmit={handleUsernameSubmit}>  
                 <label>
                     Edit Name:
                     <input type="text" value={name} onChange={handleUsernameChange} />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+            
+            <form onSubmit={handleEmailSubmit}>
+                <label>
+                    Edit Email:
+                    <input type="text" value={newEmail} onChange={handleEmailChange} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
