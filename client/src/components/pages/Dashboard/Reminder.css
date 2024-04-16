@@ -1,66 +1,81 @@
-.walletBalanceCard {
-  width: fit-content;
-  height: 55px;
-  background-color: #1c1f2f;
-  border-radius: 10px;
+.reminder-item {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  padding: 0px 12px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.svgwrapper {
-  width: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.svgwrapper svg {
-  width: 100%;
-}
-.balancewrapper {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  width: 120px;
-  gap: 0px;
-}
-.balanceHeading {
-  font-size: 8px;
-  color: rgb(214, 214, 214);
-  font-weight: 100;
-  letter-spacing: 0.6px;
-}
-.balance {
-  font-size: 13.5px;
-  color: white;
-  font-weight: 600;
-  letter-spacing: 0.5px;
 }
 
-.addmoney {
-  padding: 1px 15px;
-  border-radius: 20px;
-  background-color: #c083eb;
-  color: white;
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  min-height: 50px;
+  max-width: 150px;
+  padding: 0 1rem;
+  color: #fff;
+  font-size: 15px;
+  border: 1px solid #5e4dcd;
+  border-radius: 6px 0 0 6px;
+  background-color: transparent;
+}
+
+.button--submit {
+  min-height: 50px;
+  padding: .5em 1em;
   border: none;
-  font-size: 12px;
+  border-radius: 0 6px 6px 0;
+  background-color: #5e4dcd;
+  color: #fff;
+  font-size: 15px;
   cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-.addmoney:hover {
-  background-color: whitesmoke;
-  color: #9c59cc;
-}
-.plussign {
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  transition: background-color .3s ease-in-out;
+  }
+
+  .button--remove{
+    min-height: 10px;
+    padding: .1em .3em;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    background-color: #5e4dcd;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+  }
+  
+  .button--submit:hover {
+  background-color: #5e5dcd;
+  }
+  
+  .input:focus, .input:focus-visible {
+  border-color: #3898EC;
+  outline: none;
+  }
+  
+  .btn {
+      transition: all 0.3s ease-in-out;
+      font-family: "Dosis", sans-serif;
+  }
+  
+  .btn {
+  width: 150px;
+  height: 60px;
+  border-radius: 50px;
+  background-image: linear-gradient(135deg, #501194 0%, #ea5455 100%);
+  box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  }
+  
+  .btn:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+  }
+  
+  .btn:active {
+  opacity: 0.5;
+  }

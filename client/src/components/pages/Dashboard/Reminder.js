@@ -67,16 +67,16 @@ function Reminder({ addReminder }) {
     return (
         <div className="reminder">
             <div className="reminder-content">
-                <form onSubmit={handleReminderSubmit}>
-                    <input type="text" value={newReminder} onChange={handleReminderChange} placeholder="Add reminder" className="reminder-input" />
-                    <button type="submit" className="reminder-button addmoney">Add Reminder</button>
+                <form onSubmit={handleReminderSubmit} className = "input-group">
+                    <input type="text" value={newReminder} onChange={handleReminderChange} placeholder="Add reminder" className="input" />
+                    <button type="submit" className="button--submit">Add Reminder</button>
                 </form>
 
                 {reminders && reminders.map((reminder, index) => (
-                    <div key={index}>
-                        <p>{reminder.text}</p>
+                    <div key={index} className="reminder-item">
                         <input type="checkbox" checked={reminder.complete} onChange={() => handleMarkReminderComplete(reminder)} />
-                        <button onClick={() => handleRemoveReminder(reminder)}>Remove</button>
+                        <p>{reminder.text}</p>
+                        <button className="button--remove" onClick={() => handleRemoveReminder(reminder)}>Remove</button>
                     </div>
                 ))}
             </div>
