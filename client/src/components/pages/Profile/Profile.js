@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.css';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth, updateProfile, updateEmail, sendEmailVerification, applyActionCode, checkActionCode } from "firebase/auth";
 
 const auth = getAuth();
 const storage = getStorage();
@@ -24,21 +24,70 @@ async function uploadImageAndGetURL(file) {
     return downloadURL;
 }
 
-// Define the Profile component
+// Profile Component
 function Profile() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [profilePic, setProfilePic] = useState('');
+    const [newEmail, setNewEmail] = useState('');
   
+
+    //Email
+    const handleEmailChange = (event) => {
+        setNewEmail(event.target.value);
+    };
+    
+    const handleEmailSubmit = async (event) => {
+        event.preventDefault();
+        const actionCodeSettings = {
+            url: window.location.href, // This URL should lead the user back to your app
+            handleCodeInApp: true,
+        };
+        await sendEmailVerification(auth.currentUser, actionCodeSettings);
+    };
+    const handleEmailVerification = async (actionCode) => {
+        const info = await checkActionCode(auth, actionCode);
+        await applyActionCode(auth, actionCode);
+        await updateEmail(auth.currentUser, info.data.email);
+    };
+    
+
+    //Username 
+    const updateUsername = async () => {
+        await updateProfile(auth.currentUser, {
+            displayName: name,
+        });
+    };
+    const handleUsernameChange = (event) => {
+        setName(event.target.value);
+    };
+    const handleUsernameSubmit = (event) => {
+        event.preventDefault();
+        updateUsername();
+    };
+
     useEffect(() => {
         const auth = getAuth();
         if (auth.currentUser) {
           setName(auth.currentUser.displayName);
           setEmail(auth.currentUser.email);
-          setProfilePic(auth.currentUser.photoURL);
+        if (auth.currentUser.photoURL) {
+            setProfilePic(auth.currentUser.photoURL);
+        } else {
+            // Set default profile picture if none exists
+            setProfilePic('https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg');
+        }
+
+        //email
+        const urlParams = new URLSearchParams(window.location.search);
+        const actionCode = urlParams.get('oobCode');
+        if (actionCode) {
+            handleEmailVerification(actionCode);
+        }
         }
       }, []);
-
+      
+      //Profile picture
       const handleFileUpload = async (event) => {
                 // Get the file from the event
         const file = event.target.files[0];
@@ -53,14 +102,30 @@ function Profile() {
     
         setProfilePic(auth.currentUser.photoURL);
       };
-
+    
     return (
         <div className = "profile">
-            <h1>Hello, {name}</h1>
+            <h1>Hello, {auth.currentUser.displayName}</h1>
             <img src={profilePic} alt="Profile" />
             <input type="file" id="fileUpload" onChange={handleFileUpload} style={{display: 'none'}} />
-            <label htmlFor="fileUpload" className="customFileUpload">Upload Image</label>
+            <label htmlFor="fileUpload" className="customFileUpload btn">Upload Image</label>
             <p>Email: {email}</p>
+
+            <form onSubmit={handleUsernameSubmit} className="input-group">  
+                <label>
+                    Edit Name:
+                    <input type="text" value={name} onChange={handleUsernameChange} className="input" />
+                </label>
+                <input type="submit" value="Submit" className="button--submit" />
+            </form>
+            
+            <form onSubmit={handleEmailSubmit} className="input-group">
+                <label>
+                    Edit Email:
+                    <input type="text" value={newEmail} onChange={handleEmailChange} className="input" />
+                </label>
+                <input type="submit" value="Submit" className="button--submit" />
+            </form>
         </div>
     );
 }

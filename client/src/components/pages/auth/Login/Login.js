@@ -45,7 +45,7 @@ const Login = () => {
     return(
         <div className='loginMain'>
             <div className='logo-container'>
-            <div ><img src= {LogoImage} alt="" /></div>
+                <p>Login To Your Account</p>
             </div>
             <form onSubmit={handleSubmit} className='form'>
             {error && <p style={{ color: 'red' }}>{error}</p>}

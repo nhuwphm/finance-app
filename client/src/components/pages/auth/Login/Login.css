@@ -8,6 +8,17 @@
     background-color: rgb(42, 48, 55);
 
 }
+.logo-container{
+  border: 1px solid gray;
+  border-radius: 20px;
+  font-size: 35px;
+  margin-bottom: 40px;
+  max-width: 300px;
+  padding: 20px;
+  text-align: center;
+}
+
+
 .form {
     display: flex;
     flex-direction: column;

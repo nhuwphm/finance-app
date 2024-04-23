@@ -38,7 +38,7 @@
     font-family: inherit;
     padding: 16px 52px 0 12px;
     height: 30px;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     background: #f4f6f8;
     border: 1px solid #f4f6f8;
@@ -55,7 +55,7 @@
     transform: translate3d(0, -8px, 0) scale(0.6);
   }
   .inp input:focus {
-    background: #dd9feee6;
+    background: #dccce1e6;
     outline: none;
     border: 2px solid #2e8b43;
   }

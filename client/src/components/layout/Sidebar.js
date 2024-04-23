@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Sidebar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -8,6 +8,7 @@ function Sidebar() {
     const { logout } = useAuth();
     const [error, setError] = useState("");
     const history = useNavigate();
+    const [date, setDate] = useState(new Date());
 
     async function handleLogout() {
         setError("");
@@ -20,14 +21,25 @@ function Sidebar() {
         }
       }
 
+      useEffect(() => {
+        const timer = setInterval(() => {
+            setDate(new Date()); 
+        }, 1000);
+
+        return () => clearInterval(timer); 
+    }, []);
+    
+    const dateString = `${date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+    const timeString = date.toLocaleTimeString('en-US', { timeStyle: 'short' });
+
   return (
    <div className='sidebar'>
         <div className="user">
             <div className="profile-pic">
             <svg className="calendar-svg" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 0H2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M6.5 7a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-            <p className="date">Wednesday, April 5th</p>
+            <p className="date">{dateString}</p>
             </div>
-            <div className="time">12:15pm</div>
+            <div className="time">{timeString}</div>
             <div className="user-info">
                 <p className="user-name">User 7B-3690</p>
                 <p className="name-title">Standard User</p>

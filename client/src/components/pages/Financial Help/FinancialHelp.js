@@ -7,7 +7,7 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 
 
 function FinancialHelp() {
-  const API_KEY = process.env.REACT_APP_OPEN_AI_API_KEY;
+const API_KEY = process.env.REACT_APP_OPEN_AI_API_KEY;
 const systemMessage = { 
   "role": "system", "content": "Explain things like you're talking to a person with a basic knowledge of finance."
 }

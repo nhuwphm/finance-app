@@ -64,7 +64,8 @@ const SignUp = () => {
     return (
         <div className='main'>
           <div className='logo-container'>
-          <div ><img src= {LogoImage} alt="" /></div>
+              <p>Create Account!!
+              </p>
           </div>
         <form onSubmit={handleSubmit} className='form'>
           <CustomInput
