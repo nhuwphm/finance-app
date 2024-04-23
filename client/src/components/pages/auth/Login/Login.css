@@ -13,7 +13,7 @@
   border-radius: 20px;
   font-size: 35px;
   margin-bottom: 40px;
-  max-width: 300px;
+  max-width: 500px;
   padding: 20px;
   text-align: center;
 }
@@ -50,15 +50,3 @@
   .link a:active {
     opacity: 0.5;
   }
-
-.logo-container{
-    width: 100px;  
-    height: 100px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;    
-}
-.logo-container img {
-  max-width: 100%;
-  max-height: 100%; 
-}
