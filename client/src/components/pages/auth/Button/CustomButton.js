@@ -3,6 +3,7 @@ import "./CustomButton.css";
 
 const CustomButton = ({ disabled, type, onClick, title, test }) => {
   return (
+    <div className="custombutton">
     <button
       data-testid={test ? test : undefined}
       className= 'btn'
@@ -12,6 +13,7 @@ const CustomButton = ({ disabled, type, onClick, title, test }) => {
     >
       <div>{title}</div>
     </button>
+    </div>
   );
 };
 

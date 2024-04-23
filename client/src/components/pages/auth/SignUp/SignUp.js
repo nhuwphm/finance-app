@@ -63,7 +63,8 @@ const SignUp = () => {
     return (
         <div className='main'>
           <div className='logo-container'>
-              <p>SignUp Page - LOGO</p>
+              <p>Create Account!!
+              </p>
           </div>
         <form onSubmit={handleSubmit} className='form'>
           <CustomInput
