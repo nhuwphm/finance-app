@@ -14,7 +14,6 @@ const {
     corsOptions, 
     PORT, 
     TIMEOUT,
-    RATE_LIMITER
 } = require('./configs/configs');
 
 app.get('/', (req, res) => {
