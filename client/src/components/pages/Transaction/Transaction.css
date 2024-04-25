@@ -30,7 +30,8 @@
   .transaction-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: rgb(84, 78, 84);
+    background-color: #5e5a66;
+    font-weight: 700;
   }
   
   .transaction-table th,
@@ -46,10 +47,7 @@
     font-size: 20px;
   }
   
-  .transaction-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
+ 
   .transaction-table tr:hover {
     background-color: #e8f0fe;
   }

@@ -17,8 +17,13 @@ export const getTransactions = async () => {
   };
   
   export const deleteTransaction = async (id) => {
-    const response = await axios.delete(API + '/transaction/' + id);
-    return response.data;
+    try {
+      const response = await API.delete(`/transaction/delete/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting transaction:', error);
+      throw error;
+    }
   };
   
   export const postTransactions = async (transaction) => {
