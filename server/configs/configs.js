@@ -4,7 +4,7 @@ module.exports = {
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 
     },
-    PORT: process.env.PORT || 3000,
+    PORT: process.env.PORT || 8000,
     TIMEOUT: 10000,
     RATE_LIMITER: {
         WINDOW_MS: 1 * 60 * 1000, // 15 minutes

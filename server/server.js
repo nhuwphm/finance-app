@@ -1,17 +1,34 @@
 const express = require("express");
+const routers = require('./router');
 const app = express();
 const cors = require("cors");
+const timeout = require('connect-timeout');
+
 require('dotenv').config();
 
 //middleware
 app.use(cors());
 app.use(express.json());
 
-app.get('/user', (req, res) => {
+const { 
+    corsOptions, 
+    PORT, 
+    TIMEOUT,
+    RATE_LIMITER
+} = require('./configs/configs');
+
+app.get('/', (req, res) => {
     res.send('hello')
 })
 
-const PORT = process.env.PORT || 8000;
+app.use(cors(corsOptions));
+app.use(timeout(TIMEOUT));
+
+// Api routes
+app.use('/api', routers);
+
+
+
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
 });
