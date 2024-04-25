@@ -23,7 +23,6 @@ const appRoutes = [
 ]
 
 appRoutes.forEach((route) => {
-    console.log(typeof route.route);
     router.use(route.path, route.route);
 });
 
