@@ -5,9 +5,15 @@
   "scripts": {
     "build": "if-env TYPE=server && (cd server && npm install) || (cd client && npm install)",
     "server": "node ./server/server.js",
-    "client": "cd client && npm start"
+    "client": "cd client && npm start",
+    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+    "start-backend": "cd server && npm run start",
+    "start-frontend": "cd client && npm start"
   },
   "dependencies": {
     "if-env": "^1.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
