@@ -4,6 +4,7 @@ import AuthProvider from './contexts/AuthContext';
 import './firebase'
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import Transaction from './components/pages/Transaction/Transaction';
+import Categories from './components/pages/Categories/Category';
 import Login from './components/pages/auth/Login/Login';
 import Layout from './components/layout/Layout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout><Dashboard /></Layout>} />
           <Route path="/transaction" element={<Layout><Transaction /></Layout>} />
+          <Route path="/categories" element={<Layout><Categories /></Layout>} />
           <Route path="/financial-help" element={<Layout><FinancialHelp /></Layout>} />
           <Route path="/report" element={<Layout><Report /></Layout>} />
           <Route path="/login" element={<Login />} />

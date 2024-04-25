@@ -70,6 +70,7 @@ p.date{
 
 
 .option{
+    text-decoration: none;   
     font-family: "Raleway", sans-serif;
     color: rgb(190, 184, 184);
     display: flex;
@@ -77,15 +78,17 @@ p.date{
     list-style: none;
     display: block;
     font-size: 1.4rem;
-    margin-bottom: 30px;    
+    margin-bottom: 30px;
 }
 .option li svg {
     margin-right: 12px;
+    text-decoration: none;   
 }
 .option li{
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    text-decoration: none;   
 }
 
 .home{

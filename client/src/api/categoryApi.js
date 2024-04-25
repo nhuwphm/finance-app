@@ -22,7 +22,7 @@ export const getCategories = async () => {
   };
   
   export const deleteCategory = async (id) => {
-    const response = await axios.delete(API + '/category/' + id);
+    const response = await axios.delete(API + '/category/delete' + id);
     return response.data;
   };
 
