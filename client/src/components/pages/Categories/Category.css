@@ -1,0 +1,80 @@
+/* Category.css */
+.category-container {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.category-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; 
+    font-size: large;
+}
+
+.category-button:hover {
+    background-color: #0056b3;
+}
+
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #5e5a66;
+    font-weight: 700;
+}
+
+.category-table th,
+.category-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: medium;
+}
+
+.category-table th {
+    background-image: linear-gradient(135deg, #501194 0%, #ea5455 100%);
+    font-size: 20px;
+}
+
+.category-table tr:hover {
+    background-color: #e8f0fe;
+}
+
+.Modal {
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;       
+  max-width: 600px; 
+  height: auto;     
+  max-height: 90vh; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: white;
+  overflow: auto; 
+  outline: none;
+  padding: 20px;
+  z-index: 1000; 
+  color: #0056b3;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: 'rgba(255, 255, 255, 0.75)';
+}

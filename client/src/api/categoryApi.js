@@ -2,18 +2,28 @@ import axios from 'axios'
 import API from './api';
 
 export const getCategories = async () => {
-    const response = await axios.get(API + '/category');
-    return response.data;
-  };
-  
+  try {
+      const response = await API.get('/category');
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching categories:', error);
+      throw error;
+  }
+};
+
   export const getCategory = async (id) => {
     const response = await axios.get(API + '/category/' + id);
     return response.data;
   };
   
   export const postCategories = async (category) => {
-    const response = await axios.post(API + '/category/create', category);
-    return response.data;
+    try {
+      const response = await API.post('/category/create', category);
+      return response.data;
+    } catch (error) {
+      console.error('Error posting category:', error);
+      throw error;
+    }
   };
   
   export const updateCategory = async (id, category) => {
