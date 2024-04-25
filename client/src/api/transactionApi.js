@@ -27,11 +27,13 @@ export const getTransactions = async () => {
   };
   
   export const postTransactions = async (transaction) => {
-    const response = await axios.post(
-      API + '/transaction/create',
-      transaction
-    );
-    return response.data;
+    try {
+      const response = await API.post('/transaction/create', transaction);
+      return response.data;
+    } catch (error) {
+      console.error('Error posting transaction:', error);
+      throw error; 
+    }
   };
   
   export const getTransactionsByCategoryId = async (id) => {

@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import './CreateTransaction.css'; // Importing the CSS for styling
+import './CreateTransaction.css'; 
+import { postTransactions } from '../../../api/transactionApi'
+import { Navigate, useNavigate } from 'react-router-dom'; 
 
 function AddTransaction({ closePanel }) {
   const [formData, setFormData] = useState({
+    categoryId: '',
     amount: '',
-    type: '', // No default value for type
-    category: '',
-    date: '',
+    type: '', 
+    date: '', 
     description: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,16 +22,38 @@ function AddTransaction({ closePanel }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    closePanel(); // Consider validating data before closing the panel
+    try {
+      const completeDate = `${formData.date}T00:00:00.000Z`;
+      const dataToSend = {
+        ...formData,
+        amount: Number(formData.amount),
+        createdAt: completeDate,
+      };
+      const response = await postTransactions(dataToSend);
+      console.log('Transaction Saved:', response);
+      window.location = '/transaction';
+
+    } catch (error) {
+      console.error('Error saving transaction:', error);
+    }
   };
 
   return (
     <div className="add-transaction-form">
       <h2>Create New Transaction</h2>
       <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Category ID:</label>
+          <input
+            type="text"
+            name="categoryId"
+            value={formData.categoryId}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div className="form-group">
           <label>Amount:</label>
           <input
@@ -42,19 +68,9 @@ function AddTransaction({ closePanel }) {
           <label>Type:</label>
           <select name="type" value={formData.type} onChange={handleChange} required>
             <option value="">Select Type</option>
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
+            <option value="income">income</option>
+            <option value="expense">expense</option>
           </select>
-        </div>
-        <div className="form-group">
-          <label>Category:</label>
-          <input
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          />
         </div>
         <div className="form-group">
           <label>Date Created:</label>
