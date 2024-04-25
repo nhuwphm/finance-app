@@ -12,7 +12,6 @@ function AddTransaction({ closePanel }) {
     description: ''
   });
 
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;

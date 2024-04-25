@@ -12,8 +12,13 @@ export const getCategories = async () => {
   };
   
   export const postCategories = async (category) => {
-    const response = await axios.post(API + '/category/create', category);
-    return response.data;
+    try {
+      const response = await API.post('/category/create', category);
+      return response.data;
+    } catch (error) {
+      console.error('Error posting category:', error);
+      throw error;
+    }
   };
   
   export const updateCategory = async (id, category) => {
