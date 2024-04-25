@@ -3,8 +3,8 @@ import axios from 'axios';
 import './Category.css'; 
 import AddCategory from './CreateCategory';
 
-import ReactModal from 'react-modal'; // Ensure this import is correct
-ReactModal.setAppElement('#root'); // Set up the app element
+import ReactModal from 'react-modal'; 
+ReactModal.setAppElement('#root'); 
 
 function CategoryTable() {
     const [categories, setCategories] = useState([]);
@@ -81,7 +81,7 @@ function CategoryTable() {
             {categories.map(category => (
               <tr key={category.id}>
                 <td>{category.name}</td>
-                <td>{new Date(category.createdAt).toLocaleString()}</td>
+                <td>{new Date(category.createdAt).toLocaleDateString()}</td>
                 <td>{category.description || 'No description provided'}</td>
                 <td>
                   <button onClick={() => handleDelete(category.id)} className="delete">

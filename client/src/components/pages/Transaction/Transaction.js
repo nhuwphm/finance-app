@@ -111,7 +111,7 @@ function Transaction() {
               <td style={{ color: transaction.type === 'income' ? 'green' : transaction.type === 'expense' ? '#f95e4a' : 'black', fontWeight:"bold" }}>{transaction.type}</td>
               <td>${transaction.amount.toFixed(2)}</td>
               <td>{categories[transaction.categoryId] || transaction.categoryId}</td>
-              <td>{new Date(transaction.createdAt).toLocaleString()}</td>
+              <td>{new Date(transaction.createdAt).toLocaleDateString()}</td>
               <td>{transaction.description || 'No description provided'}</td>
               <td>
                 <button>Update</button> 
