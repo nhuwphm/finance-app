@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateTransaction.css'; 
 import { postTransactions } from '../../../api/transactionApi'
 import { Navigate, useNavigate } from 'react-router-dom'; 
+import { getCategories } from '../../../api/categoryApi'; 
 
 function AddTransaction({ closePanel }) {
   const [formData, setFormData] = useState({
@@ -11,6 +12,21 @@ function AddTransaction({ closePanel }) {
     date: '', 
     description: ''
   });
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+        try {
+            const fetchedCategories = await getCategories();
+            setCategories(fetchedCategories);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    };
+
+    loadCategories();
+}, []);
 
 
   const handleChange = (e) => {
@@ -44,14 +60,18 @@ function AddTransaction({ closePanel }) {
       <h2>Create New Transaction</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Category ID:</label>
-          <input
-            type="text"
+        <label>Category:</label>
+        <select
             name="categoryId"
             value={formData.categoryId}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select Category</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.id}>{category.name}</option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label>Amount:</label>
