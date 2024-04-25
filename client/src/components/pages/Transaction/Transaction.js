@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Transaction.css';
+
 import { getCategoryName } from '../../../api/categoryApi';
 import { deleteTransaction } from '../../../api/transactionApi';
+import AddTransaction from './CreateTransaction';
+
+import ReactModal from 'react-modal';
+ReactModal.setAppElement('#root');
 
 function Transaction() {
   const [transactions, setTransactions] = useState([]);
@@ -11,6 +16,9 @@ function Transaction() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
 
   useEffect(() => {
     setLoading(true);
@@ -56,6 +64,14 @@ function Transaction() {
       setError('Failed to delete transaction');
     }
   };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   
   
 
@@ -63,9 +79,18 @@ function Transaction() {
     <div className="transaction-container">
       <div className="transaction-header">
         <h1>Transactions</h1>
-        <Link to="/add-transaction" className="transaction-button">
+        <button onClick={openModal} className="transaction-button">
           CREATE TRANSACTIONS
-        </Link>
+        </button>
+        <ReactModal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Add Transaction"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <AddTransaction closePanel={closeModal} />
+        </ReactModal>
       </div>
       {loading && <p>Loading transactions...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
