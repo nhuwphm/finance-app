@@ -25,3 +25,14 @@ export const getCategories = async () => {
     const response = await axios.delete(API + '/category/' + id);
     return response.data;
   };
+
+
+  export const getCategoryName = async (id) => {
+    try {
+      const response = await API.get(`/category/${id}`); 
+      return response.data.name; 
+    } catch (error) {
+      console.error('Failed to fetch category:', error);
+      throw error; 
+    }
+  };

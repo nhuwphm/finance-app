@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './Transaction.css'; 
+import './Transaction.css';
+import { getCategoryName } from '../../../api/categoryApi';
 
 function Transaction() {
   const [transactions, setTransactions] = useState([]);
+  const [categories, setCategories] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -15,9 +17,10 @@ function Transaction() {
       try {
         const response = await axios.get(`${baseUrl}/transaction`);
         setTransactions(response.data);
+        fetchCategoryNames(response.data);
         setError(null);
       } catch (error) {
-        console.error('Error fetching data: ', error);
+        console.error('Error fetching transactions:', error);
         setError('Failed to fetch transactions');
       }
       setLoading(false);
@@ -26,12 +29,31 @@ function Transaction() {
     fetchData();
   }, []);
 
+  const fetchCategoryNames = async (transactions) => {
+    const newCategories = { ...categories };
+    await Promise.all(transactions.map(async (transaction) => {
+      if (!newCategories[transaction.categoryId]) {
+        newCategories[transaction.categoryId] = 'Loading...'; 
+        try {
+          const categoryName = await getCategoryName(transaction.categoryId);
+          newCategories[transaction.categoryId] = categoryName || 'Category not found';
+        } catch (error) {
+          console.error(`Error fetching category name for ID ${transaction.categoryId}:`, error);
+          newCategories[transaction.categoryId] = 'Unknown category'; 
+        }
+      }
+    }));
+    setCategories(newCategories);
+  };
+  
+  
+
   return (
     <div className="transaction-container">
       <div className="transaction-header">
         <h1>Transactions</h1>
         <Link to="/add-transaction" className="transaction-button">
-           CREATE TRANSACTIONS
+          CREATE TRANSACTIONS
         </Link>
       </div>
       {loading && <p>Loading transactions...</p>}
@@ -51,7 +73,7 @@ function Transaction() {
             <tr key={transaction.id}>
               <td>{transaction.type}</td>
               <td>${transaction.amount.toFixed(2)}</td>
-              <td>{transaction.categoryId}</td> {/* Adjust if you have category names */}
+              <td>{categories[transaction.categoryId] || transaction.categoryId}</td>
               <td>{new Date(transaction.createdAt).toLocaleString()}</td>
               <td>{transaction.description || 'No description provided'}</td>
             </tr>
