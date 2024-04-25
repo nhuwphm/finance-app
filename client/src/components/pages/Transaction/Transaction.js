@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-
+import { Link } from 'react-router-dom';
+import './Transaction.css'; 
 
 function Transaction() {
   const [transactions, setTransactions] = useState([]);
@@ -9,9 +9,6 @@ function Transaction() {
   const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
-  console.log('Base URL:', process.env.REACT_APP_API_BASE_URL);
-
-  // Function to fetch transactions
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
@@ -29,24 +26,38 @@ function Transaction() {
     fetchData();
   }, []);
 
-
-
-
   return (
-    <div>
-      <h1>Transactions</h1>
+    <div className="transaction-container">
+      <div className="transaction-header">
+        <h1>Transactions</h1>
+        <Link to="/add-transaction" className="transaction-button">
+           CREATE TRANSACTIONS
+        </Link>
+      </div>
+      {loading && <p>Loading transactions...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
-        {transactions.map(transaction => (
-          <li key={transaction.id}>
-            <div><strong>Type:</strong> {transaction.type}</div>
-            <div><strong>Amount:</strong> ${transaction.amount}</div>
-            <div><strong>Category ID:</strong> {transaction.categoryId}</div>
-            <div><strong>Created At:</strong> {new Date(transaction.createdAt).toLocaleString()}</div>
-            <div><strong>Description:</strong> {transaction.description || 'No description provided'}</div>
-          </li>
-        ))}
-      </ul>
+      <table className="transaction-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Category Name</th>
+            <th>Date Created</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map(transaction => (
+            <tr key={transaction.id}>
+              <td>{transaction.type}</td>
+              <td>${transaction.amount.toFixed(2)}</td>
+              <td>{transaction.categoryId}</td> {/* Adjust if you have category names */}
+              <td>{new Date(transaction.createdAt).toLocaleString()}</td>
+              <td>{transaction.description || 'No description provided'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
